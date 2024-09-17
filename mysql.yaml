@@ -1,6 +1,6 @@
 - name: install my sql server and configure
   vars:
-   login_host: venuportal.online
+   login_host: mysql.venuportal.online
    password_root: ExpenseApp@1
   tasks:
    - name: install my sql
