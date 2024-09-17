@@ -17,11 +17,11 @@
    - name: create expence user 
      ansible.builtin.user:    #ansible taken care irrespective of distribution user creation by using ansible module
       name: expence
-   - name: 
+   - name: creating the directory
      ansible.builtin.file:
       path: /app
       state: directory
-   - name:
+   - name: download the code
      ansible.builtin.uri:
       url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
       dest: /temp/backend.zip
