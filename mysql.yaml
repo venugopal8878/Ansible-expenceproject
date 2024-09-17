@@ -1,0 +1,25 @@
+- name: install my sql server and configure
+  vars:
+   login_host: venuportal.online
+   password_root: ExpenseApp@1
+  tasks:
+   - name: install my sql
+     ansible.builtin.package:
+      name: mysql
+      state: present
+   - name: staet mysql
+     ansible.builtin.service:
+      name: mysqld
+      state: started
+      enabled: yes
+
+   - name: check root password set up or not
+     community.mysql.mysql_info:
+      login_user: root
+      login_password: "{{ password_root }}"
+      login_host: "{{ login_host }}"
+      register: mysql_info
+
+   - name: read the output
+     ansible.builtin.debug:
+      msg: "{{ mysql_info }}"
