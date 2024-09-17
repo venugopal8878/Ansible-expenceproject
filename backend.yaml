@@ -14,11 +14,19 @@
       name: nodejs
       state: present  
 
-   - name: stare the nodejs
-     ansible.builtin.service:
-      name: nodejs
-      state: started
-      enabled: yes 
    - name: create expence user 
      ansible.builtin.user:    #ansible taken care irrespective of distribution user creation by using ansible module
       name: expence
+   - name: 
+     ansible.builtin.file:
+      path: /app
+      state: directory
+   - name:
+     ansible.builtin.uri:
+      url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+      dest: /temp/backend.zip
+   - name: 
+     ansible.builtin.unarchive:
+      src: /temp/backend
+      dest: /app
+      remote_src: yes   #Unarchive a file is  on the remote machine so we this command
