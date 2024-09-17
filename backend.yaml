@@ -22,7 +22,7 @@
       path: /app
       state: directory
    - name: download the code
-     ansible.builtin.url:
+     ansible.builtin.get_url:
       url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
       dest: /temp/backend.zip
    - name: 
