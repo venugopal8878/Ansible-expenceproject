@@ -1,6 +1,6 @@
 - name: install my sql server and configure
   vars:
-   login_host: mysql.venuportal.online
+   login_host: 172.31.22.153
    password_root: ExpenseApp@1
   hosts: mysql
   become: yes
