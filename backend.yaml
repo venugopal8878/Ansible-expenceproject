@@ -1,5 +1,6 @@
 - name:
   hosts: backend
+  become: yes
   vars:
   tasks:
    - name:
