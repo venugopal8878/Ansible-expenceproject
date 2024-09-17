@@ -2,6 +2,8 @@
   vars:
    login_host: mysql.venuportal.online
    password_root: ExpenseApp@1
+  hosts: mysql
+  become: yes
   tasks:
    - name: install my sql
      ansible.builtin.package:
