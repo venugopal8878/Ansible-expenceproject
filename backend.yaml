@@ -23,11 +23,15 @@
      ansible.builtin.file:
       path: /app
       state: directory
-   - name: download the code
+   - name: download the backend code
      ansible.builtin.get_url:
-      url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-      dest: /temp/backend.zip
-      ignore_errors: false
+      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+      dest: /tmp/backend.zip
+  #  - name: download the code
+  #    ansible.builtin.get_url:
+  #     url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+  #     dest: /temp/backend.zip
+  #     ignore_errors: false
    - name: 
      ansible.builtin.unarchive:
       src: /temp/backend
