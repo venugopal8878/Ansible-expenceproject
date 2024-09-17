@@ -29,7 +29,7 @@
 
   #  - name: set up my sql root password
   #    ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ password_root }}"
-  #    when: mysql_info failed is true #ouput is failed when root password is not setup
+  #    when: mysql_info.failed is true #ouput is failed when root password is not setup
    - name: setup MySQL root password
      ansible.builtin.command: "mysql_secure_installation --set-root-pass {{ password_root }}"
      when: mysql_info.failed is true
