@@ -13,8 +13,11 @@
 
    - name: install nodejs
      ansible.builtin.package:
-      name: nodejs
-      state: present  
+      name: "{{ item }}"
+      state: present
+      loop: 
+       - nodejs
+       - mysql  
 
    - name: create expence user 
      ansible.builtin.user:    #ansible taken care irrespective of distribution user creation by using ansible module
@@ -41,7 +44,7 @@
      ansible.builtin.command: npm install
      args:
       chdir: /app  #we should run this on wherw packgage,json file so this args chnage the dir and run that command
-   - name: copy the backnedcose
+   - name: copy the backnedcode
      ansible.builtin.copy:
       src: backend.service
       dest: /etc/systemd/system/backend.service
