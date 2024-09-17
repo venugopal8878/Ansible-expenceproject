@@ -34,7 +34,7 @@
   #     ignore_errors: false
    - name: 
      ansible.builtin.unarchive:
-      src: /temp/backend
+      src: /tmp/backend
       dest: /app
       remote_src: yes   #Unarchive a file is  on the remote machine so we this command
    - name: install dependencies
