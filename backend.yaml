@@ -2,6 +2,8 @@
   hosts: backend
   become: yes
   vars:
+   login_host: 172.31.25.129
+   password_root: ExpenseApp@1
   tasks:
    - name:
      ansible.builtin.command: dnf module disable nodejs -y
@@ -30,3 +32,30 @@
       src: /temp/backend
       dest: /app
       remote_src: yes   #Unarchive a file is  on the remote machine so we this command
+   - name: install dependencies
+     ansible.builtin.command: npm install
+     args:
+      chdir: /app  #we should run this on wherw packgage,json file so this args chnage the dir and run that command
+   - name: copy the backnedcose
+     ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
+   - name: ansible to install pymysql
+     ansible.builtin.pip:
+      name:
+      - PyMySQL
+      - cryptography
+      executable: pip3.9
+   - name: import mysql
+     community.mysql.mysql_db:
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
+      login_host: "{{ login_host }}"
+      target: /app/schema/backend.sql
+      name: all
+      state: import
+   - name: daemon reload
+     ansible.builtin.systemd_service:
+      daemon_reload: true
+      state: restarted
+      name: backend
