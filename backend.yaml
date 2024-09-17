@@ -14,7 +14,7 @@
       state: present  
 
    - name: stare the nodejs
-     ansible.builtin.services:
+     ansible.builtin.service:
       name: nodejs
       state: started
       enabled: yes 
