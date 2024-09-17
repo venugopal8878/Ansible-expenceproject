@@ -1,0 +1,23 @@
+- name:
+  hosts: backend
+  vars:
+  tasks:
+   - name:
+     ansible.builtin.command: dnf module disable nodejs -y
+
+   - name: enable nodejs20
+     ansible.builtin.command: dnf module enable nodejs:20 -y
+
+   - name: install nodejs
+     ansible.builtin.package:
+      name: nodejs
+      state: present  
+
+   - name: stare the nodejs
+     ansible.builtin.services:
+      name: nodejs
+      state: started
+      enabled: yes 
+   - name: create expence user 
+     ansible.builtin.user:    #ansible taken care irrespective of distribution user creation by using ansible module
+      name: expence
