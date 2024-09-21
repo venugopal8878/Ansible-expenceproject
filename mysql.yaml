@@ -1,6 +1,6 @@
 - name: install my sql server and configure
   vars:
-   login_host: 172.31.22.153
+   login_host: 54.82.190.175
    password_root: ExpenseApp@1
   hosts: mysql
   become: yes

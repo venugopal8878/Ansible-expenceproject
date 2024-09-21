@@ -2,7 +2,7 @@
   hosts: backend
   become: yes
   vars:
-   login_host: 172.31.25.129
+   login_host: 54.89.192.191
    password_root: ExpenseApp@1
   tasks:
    - name:
@@ -23,11 +23,11 @@
      ansible.builtin.user:    #ansible taken care irrespective of distribution user creation by using ansible module
       name: expence
    - name: creating the directory
-     ansible.builtin.file:
+     ansible.builtin.file:   #file mmodule it will take care for file creation
       path: /app
-      state: directory
+      state: directory #we can mention direrctory only the it will create
    - name: download the backend code
-     ansible.builtin.get_url:
+     ansible.builtin.get_url:   #it will get the code from url using this module like awk curl
       url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
       dest: /tmp/backend.zip
   #  - name: download the code
@@ -36,16 +36,16 @@
   #     dest: /temp/backend.zip
   #     ignore_errors: false
    - name: 
-     ansible.builtin.unarchive:
+     ansible.builtin.unarchive: #using this module we can extract the file
       src: /tmp/backend.zip
       dest: /app
       remote_src: yes   #Unarchive a file is  on the remote machine so we this command
    - name: install dependencies
-     ansible.builtin.command: npm install
+     ansible.builtin.command: npm install  # own command create using the command maodule their no ansible module 
      args:
       chdir: /app  #we should run this on wherw packgage,json file so this args chnage the dir and run that command
    - name: copy the backnedcode
-     ansible.builtin.copy:
+     ansible.builtin.copy:  #using this module we can copy the file
       src: backend.service
       dest: /etc/systemd/system/backend.service
    - name: ansible to install pymysql
